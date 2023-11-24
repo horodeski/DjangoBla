@@ -13,6 +13,6 @@ class Equipe(models.Model):
         ('4', '4'),
         ('5', '5'),
     ]
-    nota = models.IntegerField(choices=RATING_CHOICES, default='Null')
+    nota = models.IntegerField(choices=RATING_CHOICES, default='0')
     def __str__(self):
         return self.name

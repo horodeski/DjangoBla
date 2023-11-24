@@ -1,28 +1,38 @@
 from django.db import models
-from .user import User
+from .equipe import Equipe
 
 class Hackathon(models.Model):
-    CAMPI_CHOICES = [
-        ('AL', 'Abelardo Luz '),
-        ('AR', 'Araquari'),
-        ('BL', 'Blumenau'),
-        ('BR', 'Brusque'),
-        ('CA', 'Camboriú'),
-        ('CO', 'Concórdia'),
-        ('FR', 'Fraiburgo '),
-        ('IB', 'Ibirama'),
-        ('LU', 'Luzerna'),
-        ('RS', 'Rio do Sul '),
-        ('CA', 'Camboriú'),
-        ('SR', 'Santa Rosa do Sul'),
-        ('SB', 'São Bento do Sul'),
-        ('SF', 'São Francisco do Sul'),
-        ('SO', 'Sombrio '),
-        ('VI', 'Videira'),
-    ]
-    theme = models.CharField(max_length=255)
-    year = models.DateField()
-    location = models.CharField(max_length=2, choices=CAMPI_CHOICES)
+    class Campi_Choices(models.IntegerChoices):
+        AL=  1, 'Abelardo Luz'
+        AR=  2, 'Araquari'
+        BL=  3, 'Blumenau'
+        BR=  4, 'Brusque'
+        CA=  5, 'Camboriú'
+        CO=  6, 'Concórdia'
+        FR=  7, 'Fraiburgo '
+        IB=  8, 'Ibirama'
+        LU=  9, 'Luzerna'
+        RS=  10, 'Rio do Sul' 
+        SR=  11, 'Santa Rosa do Sul'
+        SB=  12, 'São Bento do Sul'
+        SF=  13, 'São Francisco do Sul'
+        SO=  14, 'Sombrio '
+        VI=  15, 'Videira'
+
+    class status(models.IntegerChoices):
+        PENDENTE = 1, "Pendente"
+        EM_ANDAMENTO = 2, "Em Andamento"
+        CONCLUIDO = 3, "Concluído"
+        
+    
+    tema = models.CharField(max_length=255)
+    ano = models.DateField(null=True)
+    campus = models.IntegerField(choices=Campi_Choices.choices)
+    estado = models.IntegerField(choices=status.choices)
+    data_inicio = models.DateTimeField(null=True)
+    data_final = models.DateTimeField(null=True)
+    equipes = models.ManyToManyField(Equipe, related_name='hackathons')
+    
     
     def __str__(self):
-        return self.name
+        return f"{self.ano} {{self.campus}}"
