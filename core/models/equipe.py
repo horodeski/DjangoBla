@@ -1,6 +1,5 @@
 from django.db import models
 from .user import User
-from .avaliacao import Avaliacao
 
 class Equipe(models.Model):
     name = models.CharField(max_length=255)
