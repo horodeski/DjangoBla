@@ -1,40 +1,65 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.core.validators import RegexValidator
+"""
+Database models.
+"""
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 
-class UserManager(BaseUserManager):
 
-    def create_user(self, email, password=None, name=None, description=None, usuario=None, **extra_fields):
+class UserManager(BaseUserManager):
+    """Manager for users."""
+
+    def create_user(self, email, password=None, **extra_fields):
+        """Create, save and return a new user."""
         if not email:
             raise ValueError("Users must have an email address.")
 
-        alphanumeric = RegexValidator(r'^[a-zA-Z0-9]*$', 'Only alphanumeric characters are allowed.')
-        if usuario:
-            alphanumeric(usuario)
-
-        user = self.model(email=self.normalize_email(email), name=name, description=description, usuario=usuario, **extra_fields)
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, password, name=None, description=None, usuario=None):
-        user = self.create_user(email, password, name=name, description=description, usuario=usuario)
+    def create_superuser(self, email, password):
+        """Create, save and return a new superuser."""
+        user = self.create_user(email, password)
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
 
         return user
 
-class User(AbstractBaseUser, PermissionsMixin):
 
+class User(AbstractBaseUser, PermissionsMixin):
+    """User model in the system."""
+    CAMPI_CHOICES = [
+        ('AL', 'Abelardo Luz '),
+        ('AR', 'Araquari'),
+        ('BL', 'Blumenau'),
+        ('BR', 'Brusque'),
+        ('CA', 'Camboriú'),
+        ('CO', 'Concórdia'),
+        ('FR', 'Fraiburgo '),
+        ('IB', 'Ibirama'),
+        ('LU', 'Luzerna'),
+        ('RS', 'Rio do Sul '),
+        ('CA', 'Camboriú'),
+        ('SR', 'Santa Rosa do Sul'),
+        ('SB', 'São Bento do Sul'),
+        ('SF', 'São Francisco do Sul'),
+        ('SO', 'Sombrio '),
+        ('VI', 'Videira'),
+    ]
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    usuario = models.CharField(max_length=255, blank=True, null=True, validators=[RegexValidator(r'^[a-zA-Z0-9]*$', 'Only alphanumeric characters are allowed.')])  # Adicionando campo de usuário com validação
+    description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    campus = models.CharField(max_length=2, choices=CAMPI_CHOICES, default='Null')
+    
     objects = UserManager()
 
     USERNAME_FIELD = "email"
