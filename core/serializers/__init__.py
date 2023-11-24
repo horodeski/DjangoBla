@@ -1,3 +1,3 @@
-from .user import UserSerializer
+from .user import UserSerializer, UserDetailSerializer
 from .equipe import EquipeSerializer
 from .hackathon import HackathonSerializer
