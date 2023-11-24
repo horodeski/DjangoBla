@@ -7,3 +7,4 @@ class HackathonSerializer(ModelSerializer):
     class Meta:
         model = Hackathon
         fields = "__all__"
+

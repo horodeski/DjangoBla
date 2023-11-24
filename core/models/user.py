@@ -8,6 +8,8 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 
+from uploader.models import Image
+
 
 class UserManager(BaseUserManager):
     """Manager for users."""
@@ -57,6 +59,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    capa = models.ForeignKey(
+    Image,
+    related_name="+",
+    on_delete=models.CASCADE,
+    null=True,
+    blank=True,
+    default=None,
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     campus = models.CharField(max_length=2, choices=CAMPI_CHOICES, default='Null')
