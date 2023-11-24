@@ -1,10 +1,9 @@
 from django.db import models
-from .user import User
-from .avaliacao import Avaliacao
 
-class Equipe(models.Model):
-    name = models.CharField(max_length=255)
-    members = models.ManyToManyField(User, related_name='equipes')
+from .user import User
+
+
+class Avaliacao(models.Model):
     RATING_CHOICES = [
         ('0', '0'),
         ('1', '1'),
@@ -14,5 +13,4 @@ class Equipe(models.Model):
         ('5', '5'),
     ]
     nota = models.IntegerField(choices=RATING_CHOICES, default='Null')
-    def __str__(self):
-        return self.name
+    avaliador = models.ForeignKey(User, related_name='avaliacoes', on_delete=models.CASCADE)
