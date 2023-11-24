@@ -1,4 +1,6 @@
 from django.db import models
+from .equipe import Equipe
+
 
 class Hackathon(models.Model):
     class Campi_Choices(models.IntegerChoices):
@@ -30,8 +32,9 @@ class Hackathon(models.Model):
     estado = models.IntegerField(choices=status.choices)
     data_inicio = models.DateTimeField(null=True)
     data_final = models.DateTimeField(null=True)
+    equipes = models.ManyToManyField(Equipe, related_name='hackathons')
     
     
     def __str__(self):
-        return f"{self.ano} {{self.campus}}"
-    
+        return f"{self.get_campus_display()} {self.ano.year}"
+
