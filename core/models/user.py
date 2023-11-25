@@ -58,6 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     ]
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    telefone = models.IntegerField(max_length=100)
     description = models.TextField(blank=True)
     capa = models.ForeignKey(
         Image,
