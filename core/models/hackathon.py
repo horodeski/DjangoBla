@@ -1,4 +1,5 @@
 from django.db import models
+from uploader.models import Image
 from .equipe import Equipe
 
 
@@ -33,6 +34,11 @@ class Hackathon(models.Model):
     data_inicio = models.DateTimeField(null=True)
     data_final = models.DateTimeField(null=True)
     equipes = models.ManyToManyField(Equipe, related_name='hackathons')
+    fotos = models.ManyToManyField(
+        Image,
+        related_name="+",
+
+    )
     
     
     def __str__(self):
