@@ -51,6 +51,7 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
+admin.site.register(models.Avaliacao)
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Hackathon)
 admin.site.register(models.Comentario)
