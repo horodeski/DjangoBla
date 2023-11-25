@@ -30,6 +30,7 @@ class Hackathon(models.Model):
     tema = models.CharField(max_length=255)
     ano = models.DateField(null=True)
     campus = models.IntegerField(choices=Campi_Choices.choices)
+    turma = models.CharField(max_length=100)
     estado = models.IntegerField(choices=status.choices)
     data_inicio = models.DateTimeField(null=True)
     data_final = models.DateTimeField(null=True)
