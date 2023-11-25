@@ -3,6 +3,7 @@ from .user import User
 
 class Equipe(models.Model):
     name = models.CharField(max_length=255)
+    tech = models.CharField(max_length=500)
     members = models.ManyToManyField(User, related_name='equipes')
     RATING_CHOICES = [
         ('0', '0'),

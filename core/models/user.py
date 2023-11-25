@@ -58,14 +58,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     ]
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    telefone = models.CharField(max_length=30)
     description = models.TextField(blank=True)
     capa = models.ForeignKey(
-    Image,
-    related_name="+",
-    on_delete=models.CASCADE,
-    null=True,
-    blank=True,
-    default=None,
+        Image,
+        related_name="+",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        default=None,
+    )
+    foto = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
     )
     telefone = models.CharField(max_length=20, blank=True)
     curriculo_lattes = models.CharField(max_length=255, blank=True)
