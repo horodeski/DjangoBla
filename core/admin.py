@@ -14,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ["id"]
     list_display = ["email", "name"]
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("email", "password","foto", "capa")}),
         (_("Personal Info"), {"fields": ("name",)}),
         (
             _("Permissions"),
@@ -39,6 +39,8 @@ class UserAdmin(BaseUserAdmin):
                     "password1",
                     "password2",
                     "name",
+                    "foto",
+                    "capa",
                     "is_active",
                     "is_staff",
                     "is_superuser",
@@ -50,3 +52,5 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Hackathon)
+admin.site.register(models.Comentario)
+admin.site.register(models.Equipe)

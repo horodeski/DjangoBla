@@ -60,12 +60,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     capa = models.ForeignKey(
-    Image,
-    related_name="+",
-    on_delete=models.CASCADE,
-    null=True,
-    blank=True,
-    default=None,
+        Image,
+        related_name="+",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        default=None,
+    )
+    foto = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
     )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
