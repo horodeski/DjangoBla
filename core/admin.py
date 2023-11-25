@@ -39,6 +39,7 @@ class UserAdmin(BaseUserAdmin):
                     "password1",
                     "password2",
                     "name",
+                    "telefone",
                     "foto",
                     "capa",
                     "is_active",
