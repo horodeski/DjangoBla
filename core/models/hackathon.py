@@ -1,6 +1,7 @@
 from django.db import models
 from uploader.models import Image
 from .equipe import Equipe
+from .tema import Tema
 
 
 class Hackathon(models.Model):
@@ -27,7 +28,7 @@ class Hackathon(models.Model):
         CONCLUIDO = 3, "Concluído"
         
     
-    tema = models.CharField(max_length=255)
+    tema = models.ManyToManyField(Tema, related_name="hackathons")
     ano = models.DateField(null=True)
     campus = models.IntegerField(choices=Campi_Choices.choices)
     turma = models.CharField(max_length=100)

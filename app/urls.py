@@ -15,6 +15,7 @@ from core.views.comentario import ComentarioViewSet
 from core.views.equipe import EquipeViewSet
 from core.views.hackathon import HackathonViewSet
 from core.views.user import UserViewSet
+from core.views.tema import TemaViewSet
 
 
 from uploader.router import router as uploader_router
@@ -24,6 +25,7 @@ router = DefaultRouter()
 router.register("users", UserViewSet, basename="users")
 router.register("equipe", EquipeViewSet, basename="equipe")
 router.register("hackathon", HackathonViewSet, basename="hackathon")
+router.register("Temas", TemaViewSet, basename="temas")
 router.register("comentario", ComentarioViewSet, basename="comentario")
 
 urlpatterns = [
