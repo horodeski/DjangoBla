@@ -67,6 +67,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     blank=True,
     default=None,
     )
+    telefone = models.CharField(max_length=20, blank=True)
+    curriculo_lattes = models.CharField(max_length=255, blank=True)
+    formacao = models.CharField(max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     campus = models.CharField(max_length=2, choices=CAMPI_CHOICES, default='Null')
